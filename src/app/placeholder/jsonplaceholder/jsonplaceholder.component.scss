@@ -1,0 +1,38 @@
+.table {
+    width: 80%;
+    margin: 0px auto;
+    .wyszukiwarka {
+        margin-top: 1.5rem !important;
+    }
+    table {
+        margin-top: 1.5rem;
+        width: 100%;
+            tr.mat-header-row {
+                th, td {
+                    padding: 0px !important;
+                }
+                th {
+                    text-align: center;
+                }
+            }
+            tr.mat-row {
+                cursor: pointer;
+                transition: all .3s;
+                th {
+                    text-align: center;
+                }
+                th, td {
+                    padding: 0px !important;
+                }
+                td:nth-child(1),td:nth-child(2) {
+                    text-align: center;
+                }
+                &:hover {
+                    background-color: #ddd !important;
+                }
+                &:nth-of-type(even) {
+                    background-color: #f8f8f8;
+                }
+            }
+    }
+}

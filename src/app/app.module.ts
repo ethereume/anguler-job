@@ -7,10 +7,15 @@ import { MaterialModule } from './material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { JsonplaceholderComponent } from './placeholder/jsonplaceholder/jsonplaceholder.component';
+import { PlaceholderService } from './placeholder/placeholder.service';
+import { JsonplaceholderPipe } from './placeholder/jsonplaceholder.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    JsonplaceholderComponent,
+    JsonplaceholderPipe
   ],
   imports: [
     BrowserModule,
@@ -21,7 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [PlaceholderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
