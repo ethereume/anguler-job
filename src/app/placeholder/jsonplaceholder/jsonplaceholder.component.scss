@@ -22,7 +22,7 @@
                     text-align: center;
                 }
                 th, td {
-                    padding: 0px !important;
+                    padding: 1rem 1.5rem;
                 }
                 td:nth-child(1),td:nth-child(2) {
                     text-align: center;
@@ -33,6 +33,9 @@
                 &:nth-of-type(even) {
                     background-color: #f8f8f8;
                 }
+            }
+            .mat-column-body {
+                width: 30%;
             }
     }
 }

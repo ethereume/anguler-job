@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { JsonplaceholderComponent } from './placeholder/jsonplaceholder/jsonplaceholder.component';
 import { PlaceholderService } from './placeholder/placeholder.service';
 import { JsonplaceholderPipe } from './placeholder/jsonplaceholder.pipe';
+import { MatPaginatorIntl } from "@angular/material/paginator";
+import  CustomPaginator  from './placeholder/paginator/PaginatorOverride';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { JsonplaceholderPipe } from './placeholder/jsonplaceholder.pipe';
     HttpClientModule,
     MaterialModule
   ],
-  providers: [PlaceholderService],
+  providers: [PlaceholderService,
+    { provide: MatPaginatorIntl, useValue: CustomPaginator() }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

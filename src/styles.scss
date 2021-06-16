@@ -37,3 +37,8 @@ $Job-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-sort-header-container {
+  justify-content: center !important;
+  transform: translateX(10px);
+}

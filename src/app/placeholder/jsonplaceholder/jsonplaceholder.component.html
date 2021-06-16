@@ -4,35 +4,39 @@
         <input matInput (keyup)="applyFilter($event)" placeholder="Wpisz frazę" #input>
     </mat-form-field>
     
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table matSort [dataSource]="dataSource">
     
         <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> ID </th>
         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
         </ng-container>
     
 
         <ng-container matColumnDef="userId">
-        <th mat-header-cell *matHeaderCellDef> UserId  </th>
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> UserId  </th>
         <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
         </ng-container>
     
 
         <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef> Tutył </th>
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Tutył </th>
         <td mat-cell *matCellDef="let element"> {{element.title}} </td>
         </ng-container>
 
         <ng-container matColumnDef="body">
         <th mat-header-cell *matHeaderCellDef> Zawartość </th>
-        <td mat-cell *matCellDef="let element"> {{element.body | jsonplaceholder:45}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.body | jsonplaceholder:generatePipeLetter(element.id) }} </td>
         </ng-container>
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr 
+            mat-row
+            (click)="collapse(row)"
+            [ngClass]="{'tr-clicked': clickedRows.indexOf(row.id) != -1}" 
+            *matRowDef="let row; columns: displayedColumns;"></tr>
     
         <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            <td class="mat-cell" colspan="4">Brak danych pasujacych do frazy "{{input.value}}"</td>
         </tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
