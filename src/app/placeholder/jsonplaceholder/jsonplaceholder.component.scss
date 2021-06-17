@@ -1,6 +1,7 @@
 .table {
     width: 80%;
     margin: 0px auto;
+    position: relative;
     .wyszukiwarka {
         margin-top: 1.5rem !important;
     }
@@ -37,5 +38,11 @@
             .mat-column-body {
                 width: 30%;
             }
+    }
+    .spinner {
+        position: absolute;
+        top: 50vh;
+        left: 50%;
+        transform: translate(-50%,-50%);
     }
 }

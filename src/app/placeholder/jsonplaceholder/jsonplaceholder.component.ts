@@ -16,7 +16,9 @@ export class JsonplaceholderComponent implements OnInit,AfterViewInit {
 
   private showLetter = 45;
   public posts:Posts[] = [];
+  public showSpinner = false;
   public clickedRows:number[] = [];
+  public pageSizes:number[] = [5,10,15,20];
   public displayedColumns: String[] = ['id', 'userId', 'title', 'body'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -26,10 +28,11 @@ export class JsonplaceholderComponent implements OnInit,AfterViewInit {
   constructor(private placeholder:PlaceholderService) { }
 
   ngOnInit(): void {
-
+    this.showSpinner = true;
     this.placeholder.getPosts().subscribe(it => {
       this.posts = it;
       this.dataSource.data = it;
+      this.showSpinner = false;
     })
   }
   ngAfterViewInit() {
