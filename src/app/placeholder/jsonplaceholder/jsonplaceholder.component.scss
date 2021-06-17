@@ -45,4 +45,20 @@
         left: 50%;
         transform: translate(-50%,-50%);
     }
+    button {
+        color: #fff;
+        transition: all .3s;
+    }
+    .mat-updaate {
+        background-color: #4c39a0;
+        &:hover {
+            background-color: #3d2d81;  
+        }
+    }
+    .mat-delete {
+        background-color: #dd3737;
+        &:hover {
+            background-color: #ad2a2a;  
+        }
+    }
 }

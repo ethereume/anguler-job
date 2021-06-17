@@ -12,13 +12,11 @@
             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
             </ng-container>
         
-
             <ng-container matColumnDef="userId">
             <th mat-header-cell mat-sort-header *matHeaderCellDef> UserId  </th>
             <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
             </ng-container>
         
-
             <ng-container matColumnDef="title">
             <th mat-header-cell mat-sort-header *matHeaderCellDef> Tutył </th>
             <td mat-cell *matCellDef="let element"> {{element.title}} </td>
@@ -28,6 +26,16 @@
             <th mat-header-cell *matHeaderCellDef> Zawartość </th>
             <td mat-cell *matCellDef="let element"> {{element.body | jsonplaceholder:generatePipeLetter(element.id) }} </td>
             </ng-container>
+
+            <ng-container matColumnDef="update">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element"><button (click)="update($event,element.id)" class="mat-updaate" mat-button >Update</button> </td>
+                </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element"><button (click)="delete($event,element.id)" class="mat-delete" mat-button >Usuń</button></td>
+             </ng-container>
         
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr 

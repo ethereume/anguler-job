@@ -19,7 +19,7 @@ export class JsonplaceholderComponent implements OnInit,AfterViewInit {
   public showSpinner = false;
   public clickedRows:number[] = [];
   public pageSizes:number[] = [5,10,15,20];
-  public displayedColumns: String[] = ['id', 'userId', 'title', 'body'];
+  public displayedColumns: String[] = ['id', 'userId', 'title', 'body',"update","delete"];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -57,6 +57,19 @@ export class JsonplaceholderComponent implements OnInit,AfterViewInit {
 
   public generatePipeLetter(id:number) {
     return this.clickedRows.indexOf(id) == -1 ? this.showLetter : -1; 
+  }
+
+  public update(e,id:number) {
+    e.stopPropagation();
+  }
+
+  public delete(e,id:number) {
+    e.stopPropagation();
+    let indexToRemove = this.posts.findIndex(it => it.id === id);
+    console.log(indexToRemove);
+    this.posts.splice(indexToRemove,1);
+    console.log(this.posts);
+    this.dataSource.data = this.posts;
   }
 
 }
