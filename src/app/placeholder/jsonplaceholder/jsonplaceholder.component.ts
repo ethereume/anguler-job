@@ -1,8 +1,9 @@
-import { AfterViewInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Posts } from 'src/app/objects/objet';
 import { PlaceholderService } from '../placeholder.service';
 
@@ -22,10 +23,14 @@ export class JsonplaceholderComponent implements OnInit,AfterViewInit {
   public displayedColumns: String[] = ['id', 'userId', 'title', 'body',"update","delete"];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild("tost") input: ElementRef<HTMLInputElement>;
 
   dataSource = new MatTableDataSource(this.posts);
 
-  constructor(private placeholder:PlaceholderService) { }
+  constructor(private placeholder:PlaceholderService,
+              private router:Router,
+              private route:ActivatedRoute,
+              private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.showSpinner = true;
@@ -61,15 +66,25 @@ export class JsonplaceholderComponent implements OnInit,AfterViewInit {
 
   public update(e,id:number) {
     e.stopPropagation();
+    let itemTooUpdate = this.posts.filter(it => it.id === id).map(it => it.id);
+    this.router.navigate(['update',itemTooUpdate[0]], {relativeTo: this.route});
+  }
+
+  public showTost(test:string,timeout:number) {
+    this.input.nativeElement.textContent = test;
+    this.renderer.addClass(this.input.nativeElement,'show');
+    let othis = this;
+    setTimeout(() => {
+        othis.renderer.removeClass(othis.input.nativeElement,'show');
+    },timeout);
   }
 
   public delete(e,id:number) {
     e.stopPropagation();
     let indexToRemove = this.posts.findIndex(it => it.id === id);
-    console.log(indexToRemove);
     this.posts.splice(indexToRemove,1);
-    console.log(this.posts);
     this.dataSource.data = this.posts;
+    this.placeholder.deletePost(indexToRemove).subscribe(it => this.showTost(`Poprawno usunięto post ${id}`,1800));
   }
 
 }

@@ -12,12 +12,14 @@ import { PlaceholderService } from './placeholder/placeholder.service';
 import { JsonplaceholderPipe } from './placeholder/jsonplaceholder.pipe';
 import { MatPaginatorIntl } from "@angular/material/paginator";
 import  CustomPaginator  from './placeholder/paginator/PaginatorOverride';
+import { UpdateComponent } from './placeholder/update/update.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     JsonplaceholderComponent,
-    JsonplaceholderPipe
+    JsonplaceholderPipe,
+    UpdateComponent
   ],
   imports: [
     BrowserModule,

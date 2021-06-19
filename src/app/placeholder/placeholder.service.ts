@@ -13,4 +13,12 @@ export class PlaceholderService {
     return this.http.get<Posts[]>("https://jsonplaceholder.typicode.com/posts");
   }
 
+  public getPost(id:number) {
+    return this.http.get<Posts>(`https://jsonplaceholder.typicode.com/posts/${id}`);
+  }
+
+  public deletePost(id:number) {
+    return this.http.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
+  }
+
 }
