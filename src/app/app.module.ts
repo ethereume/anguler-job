@@ -13,6 +13,8 @@ import { JsonplaceholderPipe } from './placeholder/jsonplaceholder.pipe';
 import { MatPaginatorIntl } from "@angular/material/paginator";
 import  CustomPaginator  from './placeholder/paginator/PaginatorOverride';
 import { UpdateComponent } from './placeholder/update/update.component';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { UpdateComponent } from './placeholder/update/update.component';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, 'Job app')
   ],
   providers: [PlaceholderService,
     { provide: MatPaginatorIntl, useValue: CustomPaginator() }],

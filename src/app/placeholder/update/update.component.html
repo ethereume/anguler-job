@@ -1,4 +1,23 @@
-<main>
-    <h1>Do zrobienia</h1>
-    <p>{{post | json}}</p>
+<main class="edit-form">
+    <h1>{{titleComponent}}</h1>
+    <form class="form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <mat-form-field>
+            <mat-label>{{ labelTitle }}</mat-label>
+            <input name="title" [(ngModel)]="title" #t="ngModel" required  matInput placeholder="Podaj tytuł"  >
+            <mat-error *ngIf="t.dirty && t.hasError('required')">Pole jest wymagane</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>{{ LabeluserIdTitle }}</mat-label>
+            <input  type="number" name="userId" [(ngModel)]="userId" #n="ngModel" required  matInput placeholder="Podaj tytuł"  >
+            <mat-error *ngIf="n.dirty && n.hasError('required')">Pole jest wymagane</mat-error>
+          </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{ labelTextarea }}</mat-label>
+            <textarea  name="body" [(ngModel)]="body"#b="ngModel" required  matInput placeholder="Zawartość..." rows="4" ></textarea>
+            <mat-error *ngIf="b.dirty && b.hasError('required')">Pole jest wymagane</mat-error>
+        </mat-form-field>
+        <button [disabled]="f.invalid" mat-button>Zapisz dane</button>
+    </form>
 </main>
