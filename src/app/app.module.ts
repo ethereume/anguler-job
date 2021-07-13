@@ -15,13 +15,17 @@ import  CustomPaginator  from './placeholder/paginator/PaginatorOverride';
 import { UpdateComponent } from './placeholder/update/update.component';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
+import { ToastComponent } from './placeholder/toast/toast.component';
+import { ShowDisableDirective } from './placeholder/show-disable.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     JsonplaceholderComponent,
     JsonplaceholderPipe,
-    UpdateComponent
+    UpdateComponent,
+    ToastComponent,
+    ShowDisableDirective
   ],
   imports: [
     BrowserModule,

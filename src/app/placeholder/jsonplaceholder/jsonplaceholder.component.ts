@@ -1,4 +1,4 @@
-import { AfterViewInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Posts } from 'src/app/objects/objet';
 import { PlaceholderService } from '../placeholder.service';
+import { ToastComponent } from '../toast/toast.component';
 
 
 @Component({
@@ -23,22 +24,22 @@ export class JsonplaceholderComponent implements OnInit,AfterViewInit {
   public displayedColumns: String[] = ['id', 'userId', 'title', 'body',"update","delete"];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild("tost") input: ElementRef<HTMLInputElement>;
+  @ViewChild("tost") input: ToastComponent;
 
   dataSource = new MatTableDataSource(this.posts);
 
   constructor(private placeholder:PlaceholderService,
               private router:Router,
-              private route:ActivatedRoute,
-              private renderer: Renderer2) { }
+              private route:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.showSpinner = true;
     this.placeholder.getPosts().subscribe(it => {
+      console.log(it);
       this.posts = it;
       this.dataSource.data = it;
       this.showSpinner = false;
-    })
+    },err => console.log(err))
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -71,11 +72,10 @@ export class JsonplaceholderComponent implements OnInit,AfterViewInit {
   }
 
   public showTost(test:string,timeout:number) {
-    this.input.nativeElement.textContent = test;
-    this.renderer.addClass(this.input.nativeElement,'show');
-    let othis = this;
+    this.input.setText(test);
+    this.input.setShow(true);
     setTimeout(() => {
-        othis.renderer.removeClass(othis.input.nativeElement,'show');
+      this.input.setShow(false);
     },timeout);
   }
 
