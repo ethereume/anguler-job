@@ -1,6 +1,6 @@
 <main class="edit-form">
     <h1>{{titleComponent}}</h1>
-    <form class="form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <form class="form" #f="ngForm">
         <mat-form-field>
             <mat-label>{{ labelTitle }}</mat-label>
             <input name="title" [(ngModel)]="title" #t="ngModel" required  matInput placeholder="Podaj tytuł"  >
@@ -18,7 +18,7 @@
             <textarea  name="body" [(ngModel)]="body"#b="ngModel" required  matInput placeholder="Zawartość..." rows="4" ></textarea>
             <mat-error *ngIf="b.dirty && b.hasError('required')">Pole jest wymagane</mat-error>
         </mat-form-field>
-        <button [disabled]="f.invalid" mat-button>Zapisz dane</button>
+        <button type="button" (click)="onSubmit(f)" [disabled]="f.invalid" mat-button>Zapisz dane</button>
     </form>
     <app-toast #tost></app-toast>
 </main>

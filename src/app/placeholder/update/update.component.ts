@@ -29,12 +29,9 @@ export class UpdateComponent implements OnInit {
               private route:ActivatedRoute,
               private router:Router,
               private fire:AngularFirestore  ) { }
-
-  public post:Posts = null;
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.fire.collection<Posts>('posts',ref => ref.where("id", "==", this.id)).valueChanges().subscribe(post => {
-      console.log(post);
       if(post && post.length === 1) {
         this.body = post[0].body;
         this.title = post[0].title;
@@ -42,7 +39,6 @@ export class UpdateComponent implements OnInit {
         this.exists = true;
       } else {
           this.placeholder.getPost(+this.id).subscribe(it => {
-            this.post = it;
             this.body = it.body;
             this.title = it.title;
             this.userId = +it.userId;
@@ -54,6 +50,7 @@ export class UpdateComponent implements OnInit {
   }
 
   public onSubmit(f:NgForm) {
+    if(f.invalid) return;
     if(this.exists) {
       this.fire.collection<Posts>('posts',ref => ref.where("id", "==", this.id)).get().subscribe(it => {
         this.fire.collection<Posts>('posts').doc(it.docs[0].id).update({
@@ -63,6 +60,7 @@ export class UpdateComponent implements OnInit {
           body: this.body
         }).then(r => {
           this.input.setShowAndHide("Poprawno zaktualizowano element",1800).subscribe(it => {
+            this.reset();
             this.router.navigate(["/dashboard"]);
           });
         });
@@ -74,13 +72,13 @@ export class UpdateComponent implements OnInit {
         title: this.title,
         body: this.body
       }).then(r => {
-        this.input.setShowAndHide("Poprawno zaktualizowano element",1800).subscribe(it => {
+        this.input.setShowAndHide("Poprawnie dodano element",1800).subscribe(it => {
+          this.reset();
           this.router.navigate(["/dashboard"]);
         });
       },err => console.log(err))
       .catch(err=> console.log(err));
     }
-    this.reset();
   }
   private reset(): void {
     this.id = null,

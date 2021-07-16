@@ -16,7 +16,7 @@ import { UpdateComponent } from './placeholder/update/update.component';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { ToastComponent } from './placeholder/toast/toast.component';
-import { ShowDisableDirective } from './placeholder/show-disable.directive';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { ShowDisableDirective } from './placeholder/show-disable.directive';
     JsonplaceholderPipe,
     UpdateComponent,
     ToastComponent,
-    ShowDisableDirective
+    MenuComponent
   ],
   imports: [
     BrowserModule,

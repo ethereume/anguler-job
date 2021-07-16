@@ -35,7 +35,6 @@ export class JsonplaceholderComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
     this.showSpinner = true;
     this.placeholder.getPosts().subscribe(it => {
-      console.log(it);
       this.posts = it;
       this.dataSource.data = it;
       this.showSpinner = false;
