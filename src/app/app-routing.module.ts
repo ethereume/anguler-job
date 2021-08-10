@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: JsonplaceholderComponent },
   { path: 'dashboard/update/:id', component:UpdateComponent},
-  { path:'**', redirectTo:"" }
+  { path:'**', redirectTo:'' }
 ];
 
 @NgModule({

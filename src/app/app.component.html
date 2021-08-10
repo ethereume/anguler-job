@@ -6,15 +6,13 @@
                     General
                 </p>
                 <ul class="menu-list">
-                    <li><a>Dashboard</a></li>
-                    <li><a>Customers</a></li>
+                    <li><a routerLink='/dashboard'>Dashboard</a></li>
                 </ul>
                 <nav class="breadcrumb" aria-label="breadcrumbs">
                     <ul>
-                    <li><a href="#">Bulma</a></li>
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">Components</a></li>
-                    <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
+                        <li *ngFor="let it of bredcrumb; let i = index" [ngClass]="{'is-active' : bredcrumb.length - 1 === i}">
+                            <a href="#">{{ it }}</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
